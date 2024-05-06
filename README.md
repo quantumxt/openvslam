@@ -15,7 +15,9 @@
 
 [<img src="https://raw.githubusercontent.com/wiki/xdspacelab/openvslam/media/tracking.gif" width="640px">](https://www.youtube.com/watch?v=Ro_s3Lbx5ms)
 
-[**[PrePrint]**](https://arxiv.org/abs/1910.01122) [**[YouTube]**](https://www.youtube.com/watch?v=Ro_s3Lbx5ms)
+[**[PrePrint]**](https://arxiv.org/abs/1910.01122) ~~[**[YouTube]**](https://www.youtube.com/watch?v=Ro_s3Lbx5ms)~~
+
+[Jetson Nano Demo](https://www.youtube.com/watch?v=r78Fg2m6f_k)
 
 OpenVSLAM is a monocular, stereo, and RGBD visual SLAM system.
 The notable features are:
