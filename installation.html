@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; OpenVSLAM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Simple Tutorial" href="simple_tutorial.html" />
+    <link rel="prev" title="Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            OpenVSLAM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#source-code">Source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements-for-openvslam">Requirements for OpenVSLAM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#requirements-for-pangolinviewer">Requirements for PangolinViewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#requirements-for-socketviewer">Requirements for SocketViewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recommended">Recommended</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites-for-unix">Prerequisites for Unix</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-for-linux">Installing for Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-for-macos">Installing for macOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#common-installation-instructions">Common Installation Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#build-instructions">Build Instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-setup-for-socketviewer">Server Setup for SocketViewer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="simple_tutorial.html">Simple Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Running on Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros_package.html">ROS Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trouble_shooting.html">Trouble Shooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OpenVSLAM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<span id="chapter-installation"></span><h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<section id="source-code">
+<span id="section-get-source"></span><h2>Source code<a class="headerlink" href="#source-code" title="Link to this heading"></a></h2>
+<p>The source code can be viewed from this <a class="reference external" href="https://github.com/quantumxt/openvslam">GitHub repository</a>.</p>
+<p>Cloning the repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/quantumxt/openvslam
+</pre></div>
+</div>
+<p>If you are Windows 10 user, please install the dependencies and OpenVSLAM with <a class="reference internal" href="#subsection-dependencies-socketviewer"><span class="std std-ref">SocketViewer support</span></a> on <a class="reference external" href="https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux">Windows Subsystem for Linux (WSL)</a>.
+We have checked the correct operation of OpenVSLAM and SocketViewer on Ubuntu 16.04 running on WSL.</p>
+<p><a class="reference internal" href="docker.html#chapter-docker"><span class="std std-ref">Docker</span></a> systems can be used instead of preparing the dependencies manually.</p>
+</section>
+<section id="dependencies">
+<span id="section-dependencies"></span><h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
+<p>OpenVSLAM requires a <strong>C++11-compliant</strong> compiler.
+It relies on several open-source libraries as shown below.</p>
+<section id="requirements-for-openvslam">
+<h3>Requirements for OpenVSLAM<a class="headerlink" href="#requirements-for-openvslam" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="http://eigen.tuxfamily.org/">Eigen</a> : version 3.3.0 or later.</p></li>
+<li><p><a class="reference external" href="https://github.com/RainerKuemmerle/g2o">g2o</a> : Please use the latest release. Tested on commit ID <a class="reference external" href="https://github.com/RainerKuemmerle/g2o/tree/9b41a4ea5ade8e1250b9c1b279f3a9c098811b5a">9b41a4e</a>.</p></li>
+<li><p><a class="reference external" href="http://faculty.cse.tamu.edu/davis/suitesparse.html">SuiteSparse</a> : Required by g2o.</p></li>
+<li><p><a class="reference external" href="https://github.com/shinsumicco/DBoW2">DBoW2</a> : <strong>Please use the custom version of DBoW2</strong> released in <a class="reference external" href="https://github.com/shinsumicco/DBoW2">https://github.com/shinsumicco/DBoW2</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/jbeder/yaml-cpp">yaml-cpp</a> : version 0.6.0 or later.</p></li>
+<li><p><a class="reference external" href="https://opencv.org/">OpenCV</a> : version 3.3.1 or later.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>OpenCV with GUI support is necessary for using the built-in viewer (Pangolin Viewer).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>OpenCV with video support is necessary if you plan on using video files (e.g. <code class="docutils literal notranslate"><span class="pre">.mp4</span></code>) as inputs.</p>
+</div>
+</section>
+<section id="requirements-for-pangolinviewer">
+<h3>Requirements for PangolinViewer<a class="headerlink" href="#requirements-for-pangolinviewer" title="Link to this heading"></a></h3>
+<div class="line-block">
+<div class="line">We provided an OpenGL-based simple viewer.</div>
+<div class="line">This viewer is implemented with <a class="reference external" href="https://github.com/stevenlovegrove/Pangolin">Pangolin</a>. Thus, we call it <strong>PangolinViewer</strong>.</div>
+<div class="line">Please install the following dependencies if you plan on using PangolinViewer.</div>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/stevenlovegrove/Pangolin">Pangolin</a> : Please use the latest release. Tested on commit ID <a class="reference external" href="https://github.com/stevenlovegrove/Pangolin/tree/ad8b5f83222291c51b4800d5a5873b0e90a0cf81">ad8b5f8</a>.</p></li>
+<li><p><a class="reference external" href="http://glew.sourceforge.net/">GLEW</a> : Required by Pangolin.</p></li>
+</ul>
+</section>
+<section id="requirements-for-socketviewer">
+<span id="subsection-dependencies-socketviewer"></span><h3>Requirements for SocketViewer<a class="headerlink" href="#requirements-for-socketviewer" title="Link to this heading"></a></h3>
+<div class="line-block">
+<div class="line">We provided an WebGL-based simple viewer running on web browsers.</div>
+<div class="line">The SLAM systems publish the map and the frame to the server implemented with <a class="reference external" href="https://nodejs.org/">Node.js</a> via WebSocket. Thus, we call it <strong>SocketViewer</strong>.</div>
+<div class="line">Please install the following dependencies if you plan on using SocketViewer.</div>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/shinsumicco/socket.io-client-cpp">socket.io-client-cpp</a> : <strong>Please use the custom version of socket.io-client-cpp</strong> released in <a class="reference external" href="https://github.com/shinsumicco/socket.io-client-cpp">https://github.com/shinsumicco/socket.io-client-cpp</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/protocolbuffers/protobuf">Protobuf</a> : version 3 or later.</p></li>
+</ul>
+<p>The following libraries are the dependencies for the server.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://nodejs.org/">Node.js</a> : version 6 or later.</p></li>
+<li><p><a class="reference external" href="https://www.npmjs.com/">npm</a> : Tested on version 3.5.2.</p></li>
+</ul>
+</section>
+<section id="recommended">
+<h3>Recommended<a class="headerlink" href="#recommended" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/google/glog">google-glog</a> : Used for stack-trace logger.</p></li>
+</ul>
+</section>
+</section>
+<section id="prerequisites-for-unix">
+<span id="section-prerequisites-unix"></span><h2>Prerequisites for Unix<a class="headerlink" href="#prerequisites-for-unix" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the following instruction, we assume that <code class="docutils literal notranslate"><span class="pre">CMAKE_INSTALL_PREFIX</span></code> is <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>. If you want to install the libraries to the different location, set <code class="docutils literal notranslate"><span class="pre">CMAKE_INSTALL_PREFIX</span></code> to your environment and <strong>set the environment variables accordingly</strong>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your PC is frozen during the build, please reduce the number of parallel compile jobs when executing <code class="docutils literal notranslate"><span class="pre">make</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-j2</span></code>).</p>
+</div>
+<section id="installing-for-linux">
+<span id="section-linux"></span><h3>Installing for Linux<a class="headerlink" href="#installing-for-linux" title="Link to this heading"></a></h3>
+<p>Tested for <strong>Ubuntu 16.04</strong>.</p>
+<p>Install the dependencies via <code class="docutils literal notranslate"><span class="pre">apt</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt<span class="w"> </span>update<span class="w"> </span>-y
+apt<span class="w"> </span>upgrade<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends
+<span class="c1"># basic dependencies</span>
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>pkg-config<span class="w"> </span>cmake<span class="w"> </span>git<span class="w"> </span>wget<span class="w"> </span>curl<span class="w"> </span>unzip
+<span class="c1"># g2o dependencies</span>
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libatlas-base-dev<span class="w"> </span>libsuitesparse-dev
+<span class="c1"># OpenCV dependencies</span>
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libgtk-3-dev
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>ffmpeg
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libavcodec-dev<span class="w"> </span>libavformat-dev<span class="w"> </span>libavutil-dev<span class="w"> </span>libswscale-dev<span class="w"> </span>libavresample-dev
+<span class="c1"># eigen dependencies</span>
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>gfortran
+<span class="c1"># other dependencies</span>
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libyaml-cpp-dev<span class="w"> </span>libgoogle-glog-dev<span class="w"> </span>libgflags-dev
+
+<span class="c1"># (if you plan on using PangolinViewer)</span>
+<span class="c1"># Pangolin dependencies</span>
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libglew-dev
+
+<span class="c1"># (if you plan on using SocketViewer)</span>
+<span class="c1"># Protobuf dependencies</span>
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>autogen<span class="w"> </span>autoconf<span class="w"> </span>libtool
+<span class="c1"># Node.js</span>
+curl<span class="w"> </span>-sL<span class="w"> </span>https://deb.nodesource.com/setup_6.x<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>-E<span class="w"> </span>bash<span class="w"> </span>-
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nodejs
+</pre></div>
+</div>
+<p>Download and install Eigen from source.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/working/dir
+wget<span class="w"> </span>-q<span class="w"> </span>http://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2
+tar<span class="w"> </span>xf<span class="w"> </span><span class="m">3</span>.3.4.tar.bz2
+rm<span class="w"> </span>-rf<span class="w"> </span><span class="m">3</span>.3.4.tar.bz2
+<span class="nb">cd</span><span class="w"> </span>eigen-eigen-5a0156e40feb
+mkdir<span class="w"> </span>-p<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>..
+make<span class="w"> </span>-j4
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>Download, build and install OpenCV from source.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/working/dir
+wget<span class="w"> </span>-q<span class="w"> </span>https://github.com/opencv/opencv/archive/3.4.0.zip
+unzip<span class="w"> </span>-q<span class="w"> </span><span class="m">3</span>.4.0.zip
+rm<span class="w"> </span>-rf<span class="w"> </span><span class="m">3</span>.4.0.zip
+<span class="nb">cd</span><span class="w"> </span>opencv-3.4.0
+mkdir<span class="w"> </span>-p<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DENABLE_CXX11<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_DOCS<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_EXAMPLES<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_JASPER<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_OPENEXR<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_PERF_TESTS<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_TESTS<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DWITH_EIGEN<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DWITH_FFMPEG<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DWITH_OPENMP<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>..
+make<span class="w"> </span>-j4
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>Jump to <a class="reference internal" href="#subsection-common-linux-macos"><span class="std std-ref">Common Installation Instructions</span></a> for the next step.</p>
+</section>
+<section id="installing-for-macos">
+<span id="section-macos"></span><h3>Installing for macOS<a class="headerlink" href="#installing-for-macos" title="Link to this heading"></a></h3>
+<p>Tested for <strong>macOS High Sierra</strong>.</p>
+<p>Install the dependencies via <code class="docutils literal notranslate"><span class="pre">brew</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>update
+<span class="c1"># basic dependencies</span>
+brew<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w"> </span>cmake<span class="w"> </span>git
+<span class="c1"># g2o dependencies</span>
+brew<span class="w"> </span>install<span class="w"> </span>suite-sparse
+<span class="c1"># OpenCV dependencies and OpenCV</span>
+brew<span class="w"> </span>install<span class="w"> </span>eigen
+brew<span class="w"> </span>install<span class="w"> </span>ffmpeg
+brew<span class="w"> </span>install<span class="w"> </span>opencv
+<span class="c1"># other dependencies</span>
+brew<span class="w"> </span>install<span class="w"> </span>yaml-cpp<span class="w"> </span>glog<span class="w"> </span>gflags
+
+<span class="c1"># (if you plan on using PangolinViewer)</span>
+<span class="c1"># Pangolin dependencies</span>
+brew<span class="w"> </span>install<span class="w"> </span>glew
+
+<span class="c1"># (if you plan on using SocketViewer)</span>
+<span class="c1"># Protobuf dependencies</span>
+brew<span class="w"> </span>install<span class="w"> </span>automake<span class="w"> </span>autoconf<span class="w"> </span>libtool
+<span class="c1"># Node.js</span>
+brew<span class="w"> </span>install<span class="w"> </span>node
+</pre></div>
+</div>
+<p>Jump to <a class="reference internal" href="#subsection-common-linux-macos"><span class="std std-ref">Common Installation Instructions</span></a> for the next step.</p>
+</section>
+<section id="common-installation-instructions">
+<span id="subsection-common-linux-macos"></span><h3>Common Installation Instructions<a class="headerlink" href="#common-installation-instructions" title="Link to this heading"></a></h3>
+<p>Download, build and install <strong>the custom DBoW2</strong> from source.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/working/dir
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/shinsumicco/DBoW2.git
+<span class="nb">cd</span><span class="w"> </span>DBoW2
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>..
+make<span class="w"> </span>-j4
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>Download, build and install g2o.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/working/dir
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/RainerKuemmerle/g2o.git
+<span class="nb">cd</span><span class="w"> </span>g2o
+git<span class="w"> </span>checkout<span class="w"> </span>9b41a4ea5ade8e1250b9c1b279f3a9c098811b5a
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_CXX_FLAGS<span class="o">=</span>-std<span class="o">=</span>c++11<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_SHARED_LIBS<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_UNITTESTS<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_WITH_MARCH_NATIVE<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DG2O_USE_CHOLMOD<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DG2O_USE_CSPARSE<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DG2O_USE_OPENGL<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DG2O_USE_OPENMP<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>..
+make<span class="w"> </span>-j4
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">(<strong>if you plan on using PangolinViewer</strong>)</div>
+<div class="line">Download, build and install Pangolin from source.</div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/working/dir
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/stevenlovegrove/Pangolin.git
+<span class="nb">cd</span><span class="w"> </span>Pangolin
+git<span class="w"> </span>checkout<span class="w"> </span>ad8b5f83222291c51b4800d5a5873b0e90a0cf81
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>..
+make<span class="w"> </span>-j4
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">(<strong>if you plan on using SocketViewer</strong>)</div>
+<div class="line">Download, build and install socket.io-client-cpp from source.</div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/working/dir
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/shinsumicco/socket.io-client-cpp
+<span class="nb">cd</span><span class="w"> </span>socket.io-client-cpp
+git<span class="w"> </span>submodule<span class="w"> </span>init
+git<span class="w"> </span>submodule<span class="w"> </span>update
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_UNIT_TESTS<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>..
+make<span class="w"> </span>-j4
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">(<strong>if you plan on using SocketViewer</strong>)</div>
+<div class="line">Install Protobuf.</div>
+</div>
+<p>If you use Ubuntu 18.04 or macOS, Protobuf 3.x can be installed via <code class="docutils literal notranslate"><span class="pre">apt</span></code> or <code class="docutils literal notranslate"><span class="pre">brew</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># for Ubuntu 18.04 (or later)</span>
+apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libprotobuf-dev<span class="w"> </span>protobuf-compiler
+<span class="c1"># for macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>protobuf
+</pre></div>
+</div>
+<p>Otherwise, please download, build and install Protobuf from source.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>-q<span class="w"> </span>https://github.com/google/protobuf/archive/v3.6.1.tar.gz
+tar<span class="w"> </span>xf<span class="w"> </span>v3.6.1.tar.gz
+<span class="nb">cd</span><span class="w"> </span>protobuf-3.6.1
+./autogen.sh
+./configure<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--prefix<span class="o">=</span>/usr/local<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--enable-static<span class="o">=</span>no
+make<span class="w"> </span>-j4
+make<span class="w"> </span>install
+</pre></div>
+</div>
+</section>
+</section>
+<section id="build-instructions">
+<span id="section-build-unix"></span><h2>Build Instructions<a class="headerlink" href="#build-instructions" title="Link to this heading"></a></h2>
+<p>When building with support for PangolinViewer, please specify the following cmake options: <code class="docutils literal notranslate"><span class="pre">-DUSE_PANGOLIN_VIEWER=ON</span></code> and <code class="docutils literal notranslate"><span class="pre">-DUSE_SOCKET_PUBLISHER=OFF</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_WITH_MARCH_NATIVE<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_PANGOLIN_VIEWER<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_SOCKET_PUBLISHER<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_STACK_TRACE_LOGGER<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBOW_FRAMEWORK<span class="o">=</span>DBoW2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_TESTS<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>..
+make<span class="w"> </span>-j4
+</pre></div>
+</div>
+<p>When building with support for SocketViewer, please specify the following cmake options: <code class="docutils literal notranslate"><span class="pre">-DUSE_PANGOLIN_VIEWER=OFF</span></code> and <code class="docutils literal notranslate"><span class="pre">-DUSE_SOCKET_PUBLISHER=ON</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_WITH_MARCH_NATIVE<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_PANGOLIN_VIEWER<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_SOCKET_PUBLISHER<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_STACK_TRACE_LOGGER<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBOW_FRAMEWORK<span class="o">=</span>DBoW2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_TESTS<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>..
+make<span class="w"> </span>-j4
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">cmake</span></code> cannot find any dependencies, set the environment variables directly.
+For example, when <code class="docutils literal notranslate"><span class="pre">CMAKE_INSTALL_PREFIX</span></code> is <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Eigen3_DIR=/usr/local/share/eigen3/cmake</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OpenCV_DIR=/usr/local/share/OpenCV</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DBoW2_DIR=/usr/local/lib/cmake/DBoW2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">g2o_DIR=/usr/local/lib/cmake/g2o</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Pangolin_DIR=/usr/local/lib/cmake/Pangolin</span></code> (if installed)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sioclient_DIR=/usr/local/lib/cmake/sioclient</span></code> (if installed)</p></li>
+</ul>
+</div>
+<p>After building, check to see if it was successfully built by executing <code class="docutils literal notranslate"><span class="pre">./run_kitti_slam</span> <span class="pre">-h</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_kitti_slam<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-d,<span class="w"> </span>--data-dir<span class="w"> </span>arg<span class="w">     </span>directory<span class="w"> </span>path<span class="w"> </span>which<span class="w"> </span>contains<span class="w"> </span>dataset
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+--debug<span class="w">                </span>debug<span class="w"> </span>mode
+--eval-log<span class="w">             </span>store<span class="w"> </span>trajectory<span class="w"> </span>and<span class="w"> </span>tracking<span class="w"> </span><span class="nb">times</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>evaluation
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>store<span class="w"> </span>a<span class="w"> </span>map<span class="w"> </span>database<span class="w"> </span>at<span class="w"> </span>this<span class="w"> </span>path<span class="w"> </span>after<span class="w"> </span>SLAM
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If OpenVSLAM terminates abnormaly, rebuild g2o and OpenVSLAM with <code class="docutils literal notranslate"><span class="pre">-DBUILD_WITH_MARCH_NATIVE=OFF</span></code> option for <code class="docutils literal notranslate"><span class="pre">cmake</span></code> configulation.</p>
+</div>
+</section>
+<section id="server-setup-for-socketviewer">
+<span id="section-server-setup"></span><h2>Server Setup for SocketViewer<a class="headerlink" href="#server-setup-for-socketviewer" title="Link to this heading"></a></h2>
+<p>If you plan on using SocketViewer, please setup the environment for the server with <code class="docutils literal notranslate"><span class="pre">npm</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam/viewer
+$<span class="w"> </span>ls
+Dockerfile<span class="w">  </span>app.js<span class="w">  </span>package.json<span class="w">  </span>public<span class="w">  </span>views
+$<span class="w"> </span>npm<span class="w"> </span>install
+added<span class="w"> </span><span class="m">88</span><span class="w"> </span>packages<span class="w"> </span>from<span class="w"> </span><span class="m">60</span><span class="w"> </span>contributors<span class="w"> </span>and<span class="w"> </span>audited<span class="w"> </span><span class="m">204</span><span class="w"> </span>packages<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">2</span>.105s
+found<span class="w"> </span><span class="m">0</span><span class="w"> </span>vulnerabilities
+$<span class="w"> </span>ls
+Dockerfile<span class="w">  </span>app.js<span class="w">  </span>node_modules<span class="w">  </span>package-lock.json<span class="w">  </span>package.json<span class="w">  </span>public<span class="w">  </span>views
+</pre></div>
+</div>
+<p>Then, launch the server with <code class="docutils literal notranslate"><span class="pre">node</span> <span class="pre">app.js</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam/viewer
+$<span class="w"> </span>ls
+Dockerfile<span class="w">  </span>app.js<span class="w">  </span>node_modules<span class="w">  </span>package-lock.json<span class="w">  </span>package.json<span class="w">  </span>public<span class="w">  </span>views
+$<span class="w"> </span>node<span class="w"> </span>app.js
+WebSocket:<span class="w"> </span>listening<span class="w"> </span>on<span class="w"> </span>*:3000
+HTTP<span class="w"> </span>server:<span class="w"> </span>listening<span class="w"> </span>on<span class="w"> </span>*:3001
+</pre></div>
+</div>
+<p>After launching, please access to <code class="docutils literal notranslate"><span class="pre">http://localhost:3001/</span></code> to check whether the server is correctly launched.</p>
+<a class="reference internal image-reference" href="_images/browser_viewer_default.png"><img alt="_images/browser_viewer_default.png" class="align-center" src="_images/browser_viewer_default.png" style="width: 800px;" />
+</a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you try <a class="reference internal" href="simple_tutorial.html#chapter-simple-tutorial"><span class="std std-ref">the tutotial</span></a> and <a class="reference internal" href="example.html#chapter-example"><span class="std std-ref">the examples</span></a> with SocketViewer, please launch the server in the other terminal and access to it with the web browser <strong>in advance</strong>.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="simple_tutorial.html" class="btn btn-neutral float-right" title="Simple Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, National Institute of Advanced Industrial Science and Technology (AIST).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

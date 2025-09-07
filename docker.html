@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running on Docker &mdash; OpenVSLAM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ROS Package" href="ros_package.html" />
+    <link rel="prev" title="Example" href="example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            OpenVSLAM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_tutorial.html">Simple Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running on Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#instructions-for-pangolinviewer">Instructions for PangolinViewer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-docker-image">Building Docker Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#starting-docker-container">Starting Docker Container</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#instructions-for-socketviewer">Instructions for SocketViewer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-docker-images">Building Docker Images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#docker-image-of-openvslam">Docker Image of OpenVSLAM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker-image-of-server">Docker Image of Server</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#starting-docker-containers">Starting Docker Containers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#on-linux">On Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#on-macos">On macOS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bind-of-directories">Bind of Directories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ros_package.html">ROS Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trouble_shooting.html">Trouble Shooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OpenVSLAM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Running on Docker</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/docker.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-on-docker">
+<span id="chapter-docker"></span><h1>Running on Docker<a class="headerlink" href="#running-on-docker" title="Link to this heading"></a></h1>
+<section id="instructions-for-pangolinviewer">
+<span id="section-instructions-for-pangolinviewer"></span><h2>Instructions for PangolinViewer<a class="headerlink" href="#instructions-for-pangolinviewer" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Dockerfile.desktop</span></code> can be used for easy installation.
+This chapter provides instructions on building and running examples with PangolinViewer support using Docker.</p>
+<p>The instructions are tested on Ubuntu 16.04 and 18.04.
+Docker for Mac are NOT supported due to OpenGL forwarding.</p>
+<p>Note that <strong>docker host machines with NVIDIA graphics cards are NOT officially supported yet.</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you plan on using a machine with NVIDIA graphics card(s), please use <a class="reference external" href="https://github.com/NVIDIA/nvidia-docker">nvidia-docker2</a> and the version 390 or later of NVIDIA driver.
+These examples depend on X11 forwarding with OpenGL for visualization.
+Note that our <code class="docutils literal notranslate"><span class="pre">Dockerfile.desktop</span></code> is <strong>NOT</strong> compatible with nvidia-docker1.</p>
+</div>
+<p>If the viewer cannot be lanched at all or you are using macOS, please <a class="reference internal" href="installation.html#chapter-installation"><span class="std std-ref">install the dependencies manually</span></a> or use <a class="reference internal" href="#section-instructions-for-socketviewer"><span class="std std-ref">the docker images for SocketViewer</span></a>.</p>
+<section id="building-docker-image">
+<h3>Building Docker Image<a class="headerlink" href="#building-docker-image" title="Link to this heading"></a></h3>
+<p>Execute the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>openvslam-desktop<span class="w"> </span>-f<span class="w"> </span>Dockerfile.desktop<span class="w"> </span>.
+</pre></div>
+</div>
+<p>You can accelerate the build of the docker image with <code class="docutils literal notranslate"><span class="pre">--build-arg</span> <span class="pre">NUM_THREADS=&lt;number</span> <span class="pre">of</span> <span class="pre">parallel</span> <span class="pre">builds&gt;</span></code> option. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># building the docker image with four threads</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>openvslam-desktop<span class="w"> </span>-f<span class="w"> </span>Dockerfile.desktop<span class="w"> </span>.<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">NUM_THREADS</span><span class="o">=</span><span class="m">4</span>
+</pre></div>
+</div>
+</section>
+<section id="starting-docker-container">
+<h3>Starting Docker Container<a class="headerlink" href="#starting-docker-container" title="Link to this heading"></a></h3>
+<p>In order to enable X11 forwarding, supplemental options (<code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">DISPLAY=$DISPLAY</span></code> and <code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">/tmp/.X11-unix/:/tmp/.X11-unix:ro</span></code>) are needed for <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># before launching the container, allow display access from local users</span>
+xhost<span class="w"> </span>+local:
+<span class="c1"># launch the container</span>
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:ro<span class="w"> </span>openvslam-desktop
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Additional option <code class="docutils literal notranslate"><span class="pre">--runtime=nvidia</span></code> is needed if you use NVIDIA graphics card(s).</p>
+</div>
+<p>After launching the container, the shell interface will be launched in the docker container.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>root@ddad048b5fff:/openvslam/build#<span class="w"> </span>ls
+lib<span class="w">                     </span>run_image_slam<span class="w">          </span>run_video_slam
+run_euroc_slam<span class="w">          </span>run_kitti_slam<span class="w">          </span>run_tum_slam
+run_image_localization<span class="w">  </span>run_video_localization
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="simple_tutorial.html#chapter-simple-tutorial"><span class="std std-ref">Tutorial</span></a> to run SLAM examples in the container.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the viewer does not work, please <a class="reference internal" href="installation.html#section-dependencies"><span class="std std-ref">install the dependencies manually</span></a> on your host machine or use <a class="reference internal" href="#section-instructions-for-socketviewer"><span class="std std-ref">the docker images for SocketViewer</span></a> instead.</p>
+</div>
+<p>If you need to access to any files and directories on a host machine from the container, <a class="reference internal" href="#section-directory-binding"><span class="std std-ref">bind directories</span></a> between the host and the container.</p>
+</section>
+</section>
+<section id="instructions-for-socketviewer">
+<span id="section-instructions-for-socketviewer"></span><h2>Instructions for SocketViewer<a class="headerlink" href="#instructions-for-socketviewer" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Dockerfile.socket</span></code> and <code class="docutils literal notranslate"><span class="pre">viewer/Dockerfile</span></code> can be used for easy installation.
+This chapter provides instructions on building and running examples with SocketViewer support using Docker.</p>
+<section id="building-docker-images">
+<h3>Building Docker Images<a class="headerlink" href="#building-docker-images" title="Link to this heading"></a></h3>
+<section id="docker-image-of-openvslam">
+<h4>Docker Image of OpenVSLAM<a class="headerlink" href="#docker-image-of-openvslam" title="Link to this heading"></a></h4>
+<p>Execute the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>openvslam-socket<span class="w"> </span>-f<span class="w"> </span>Dockerfile.socket<span class="w"> </span>.
+</pre></div>
+</div>
+<p>You can accelerate the build of the docker image with <code class="docutils literal notranslate"><span class="pre">--build-arg</span> <span class="pre">NUM_THREADS=&lt;number</span> <span class="pre">of</span> <span class="pre">parallel</span> <span class="pre">builds&gt;</span></code> option. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># building the docker image with four threads</span>
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>openvslam-socket<span class="w"> </span>-f<span class="w"> </span>Dockerfile.socket<span class="w"> </span>.<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">NUM_THREADS</span><span class="o">=</span><span class="m">4</span>
+</pre></div>
+</div>
+</section>
+<section id="docker-image-of-server">
+<h4>Docker Image of Server<a class="headerlink" href="#docker-image-of-server" title="Link to this heading"></a></h4>
+<p>Execute the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam
+<span class="nb">cd</span><span class="w"> </span>viewer
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>openvslam-server<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="starting-docker-containers">
+<h3>Starting Docker Containers<a class="headerlink" href="#starting-docker-containers" title="Link to this heading"></a></h3>
+<section id="on-linux">
+<h4>On Linux<a class="headerlink" href="#on-linux" title="Link to this heading"></a></h4>
+<p>Launch the server container and access to it with the web browser in advance.
+Please specify <code class="docutils literal notranslate"><span class="pre">--net=host</span></code> in order to share the network with the host machine.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>openvslam-server<span class="w"> </span>--net<span class="o">=</span>host<span class="w"> </span>openvslam-server
+WebSocket:<span class="w"> </span>listening<span class="w"> </span>on<span class="w"> </span>*:3000
+HTTP<span class="w"> </span>server:<span class="w"> </span>listening<span class="w"> </span>on<span class="w"> </span>*:3001
+</pre></div>
+</div>
+<p>After launching, access to <code class="docutils literal notranslate"><span class="pre">http://localhost:3001/</span></code> with the web browser.</p>
+<p>Next, launch the container of OpenVSLAM.
+The shell interface will be launched in the docker container.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>openvslam-socket<span class="w"> </span>--net<span class="o">=</span>host<span class="w"> </span>openvslam-socket
+root@hostname:/openvslam/build#
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="simple_tutorial.html#chapter-simple-tutorial"><span class="std std-ref">Tutorial</span></a> to run SLAM examples in the container.</p>
+<p>If you need to access to any files and directories on a host machine from the container, <a class="reference internal" href="#section-directory-binding"><span class="std std-ref">bind directories</span></a> between the host and the container.</p>
+</section>
+<section id="on-macos">
+<h4>On macOS<a class="headerlink" href="#on-macos" title="Link to this heading"></a></h4>
+<p>Launch the server container and access to it with the web browser in advance.
+Please specify <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">3001:3001</span></code> for port-forwarding.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>openvslam-server<span class="w"> </span>-p<span class="w"> </span><span class="m">3001</span>:3001<span class="w"> </span>openvslam-server
+WebSocket:<span class="w"> </span>listening<span class="w"> </span>on<span class="w"> </span>*:3000
+HTTP<span class="w"> </span>server:<span class="w"> </span>listening<span class="w"> </span>on<span class="w"> </span>*:3001
+</pre></div>
+</div>
+<p>After launching, access to <code class="docutils literal notranslate"><span class="pre">http://localhost:3001/</span></code> with the web browser.</p>
+<p>Then, inspect the container’s IP address and append the <code class="docutils literal notranslate"><span class="pre">SocketPublisher.server_uri</span></code> entry to the YAML config file of OpenVSLAM.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># inspect the server&#39;s IP address</span>
+$<span class="w"> </span>docker<span class="w"> </span>inspect<span class="w"> </span>openvslam-server<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-m<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\&quot;</span>IPAddress<span class="se">\&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/ //g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/,//g&#39;</span>
+<span class="s2">&quot;IPAddress&quot;</span>:<span class="w"> </span><span class="s2">&quot;172.17.0.2&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config file of OpenVSLAM</span>
+
+<span class="nn">...</span>
+
+<span class="c1">#============================#</span>
+<span class="c1"># SocketPublisher Parameters #</span>
+<span class="c1">#============================#</span>
+
+<span class="c1"># append this entry</span>
+<span class="nt">SocketPublisher.server_uri</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://172.17.0.2:3000&quot;</span>
+</pre></div>
+</div>
+<p>Next, launch the container of OpenVSLAM.
+The shell interface will be launched in the docker container.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>openvslam-socket<span class="w"> </span>openvslam-socket
+root@hostname:/openvslam/build#
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">See <a class="reference internal" href="simple_tutorial.html#chapter-simple-tutorial"><span class="std std-ref">Tutorial</span></a> to run SLAM examples in the container.</div>
+<div class="line">Please don’t forget to append <code class="docutils literal notranslate"><span class="pre">SocketPublisher.server_uri</span></code> entry to the <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> if you use the downloaded datasets in the tutorial.</div>
+</div>
+<p>If you need to access to any files and directories on a host machine from the container, <a class="reference internal" href="#section-directory-binding"><span class="std std-ref">bind directories</span></a> between the host and the container.</p>
+</section>
+</section>
+</section>
+<section id="bind-of-directories">
+<span id="section-directory-binding"></span><h2>Bind of Directories<a class="headerlink" href="#bind-of-directories" title="Link to this heading"></a></h2>
+<p>If you need to access to any files and directories on a host machine from the container, bind directories between the host and the container using <code class="docutils literal notranslate"><span class="pre">--volume</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> option.
+(See <a class="reference external" href="https://docs.docker.com/engine/reference/commandline/run/">the docker documentataion</a>.)</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># launch a container of openvslam-desktop with --volume option</span>
+$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--runtime<span class="o">=</span>nvidia<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--volume<span class="w"> </span>/path/to/dataset/dir/:/dataset:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--volume<span class="w"> </span>/path/to/vocab/dir:/vocab:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>openvslam-desktop
+<span class="c1"># dataset/ and vocab/ are found at the root directory in the container</span>
+root@0c0c9f115d74:/#<span class="w"> </span>ls<span class="w"> </span>/
+...<span class="w">   </span>dataset/<span class="w">   </span>vocab/<span class="w">   </span>...
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># launch a container of openvslam-socket with --volume option</span>
+$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>openvslam-socket<span class="w"> </span>--net<span class="o">=</span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--volume<span class="w"> </span>/path/to/dataset/dir/:/dataset:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--volume<span class="w"> </span>/path/to/vocab/dir:/vocab:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>openvslam-socket
+<span class="c1"># dataset/ and vocab/ are found at the root directory in the container</span>
+root@0c0c9f115d74:/#<span class="w"> </span>ls<span class="w"> </span>/
+...<span class="w">   </span>dataset/<span class="w">   </span>vocab/<span class="w">   </span>...
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example.html" class="btn btn-neutral float-left" title="Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ros_package.html" class="btn btn-neutral float-right" title="ROS Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, National Institute of Advanced Industrial Science and Technology (AIST).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

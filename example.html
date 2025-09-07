@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example &mdash; OpenVSLAM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Running on Docker" href="docker.html" />
+    <link rel="prev" title="Simple Tutorial" href="simple_tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            OpenVSLAM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_tutorial.html">Simple Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#slam-with-video-files">SLAM with Video Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tracking-and-mapping">Tracking and Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#localization">Localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#slam-with-image-sequences">SLAM with Image Sequences</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Tracking and Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#slam-with-standard-datasets">SLAM with Standard Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#kitti-odometry-dataset">KITTI Odometry dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euroc-mav-dataset">EuRoC MAV dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tum-rgbd-dataset">TUM RGBD dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#slam-with-uvc-camera">SLAM with UVC camera</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Tracking and Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Localization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Running on Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros_package.html">ROS Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trouble_shooting.html">Trouble Shooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OpenVSLAM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/example.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example">
+<span id="chapter-example"></span><h1>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h1>
+<p>We provided example code snippets for running OpenVSLAM with variety of datasets.</p>
+<section id="slam-with-video-files">
+<span id="section-example-video"></span><h2>SLAM with Video Files<a class="headerlink" href="#slam-with-video-files" title="Link to this heading"></a></h2>
+<section id="tracking-and-mapping">
+<h3>Tracking and Mapping<a class="headerlink" href="#tracking-and-mapping" title="Link to this heading"></a></h3>
+<p>We provide an example snippet for using video files (e.g. <code class="docutils literal notranslate"><span class="pre">.mp4</span></code>) for visual SLAM.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./example/run_video_slam.cc</span></code>.
+The following options are allowed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_video_slam<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-m,<span class="w"> </span>--video<span class="w"> </span>arg<span class="w">        </span>video<span class="w"> </span>file<span class="w"> </span>path
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+--mask<span class="w"> </span>arg<span class="w">             </span>mask<span class="w"> </span>image<span class="w"> </span>path
+--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+--debug<span class="w">                </span>debug<span class="w"> </span>mode
+--eval-log<span class="w">             </span>store<span class="w"> </span>trajectory<span class="w"> </span>and<span class="w"> </span>tracking<span class="w"> </span><span class="nb">times</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>evaluation
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>store<span class="w"> </span>a<span class="w"> </span>map<span class="w"> </span>database<span class="w"> </span>at<span class="w"> </span>this<span class="w"> </span>path<span class="w"> </span>after<span class="w"> </span>SLAM
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">The camera that captures the video file must be calibrated. Create a config file (<code class="docutils literal notranslate"><span class="pre">.yaml</span></code>) according to the camera parameters.</div>
+<div class="line">We provided a vocabulary file for DBoW2 at <a class="reference external" href="https://drive.google.com/open?id=1wUPb328th8bUqhOk-i8xllt5mgRW4n84">here</a>. You can use <code class="docutils literal notranslate"><span class="pre">orb_vocab.dbow2</span></code> in the zip file.</div>
+</div>
+</section>
+<section id="localization">
+<h3>Localization<a class="headerlink" href="#localization" title="Link to this heading"></a></h3>
+<p>We provide an example snippet for using video files (e.g. <code class="docutils literal notranslate"><span class="pre">.mp4</span></code>) for localization based on a prebuilt map.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./example/run_video_localization.cc</span></code>.
+The following options are allowed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_video_localization<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-m,<span class="w"> </span>--video<span class="w"> </span>arg<span class="w">        </span>video<span class="w"> </span>file<span class="w"> </span>path
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>path<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>prebuilt<span class="w"> </span>map<span class="w"> </span>database
+--mapping<span class="w">              </span>perform<span class="w"> </span>mapping<span class="w"> </span>as<span class="w"> </span>well<span class="w"> </span>as<span class="w"> </span>localization
+--mask<span class="w"> </span>arg<span class="w">             </span>mask<span class="w"> </span>image<span class="w"> </span>path
+--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+--debug<span class="w">                </span>debug<span class="w"> </span>mode
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">The camera that captures the video file must be calibrated. Create a config file (<code class="docutils literal notranslate"><span class="pre">.yaml</span></code>) according to the camera parameters.</div>
+<div class="line">We provided a vocabulary file for DBoW2 at <a class="reference external" href="https://drive.google.com/open?id=1wUPb328th8bUqhOk-i8xllt5mgRW4n84">here</a>. You can use <code class="docutils literal notranslate"><span class="pre">orb_vocab.dbow2</span></code> in the zip file.</div>
+</div>
+<p>You can create a map database file by running one of the <code class="docutils literal notranslate"><span class="pre">run_****_slam</span></code> executables with <code class="docutils literal notranslate"><span class="pre">--map-db</span> <span class="pre">map_file_name.msg</span></code> option.</p>
+</section>
+</section>
+<section id="slam-with-image-sequences">
+<span id="section-example-image-sequence"></span><h2>SLAM with Image Sequences<a class="headerlink" href="#slam-with-image-sequences" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Tracking and Mapping<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>We provided an example snippet for using image sequences for visual SLAM.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./example/run_image_slam.cc</span></code>.
+The following options are allowed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_image_slam<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-i,<span class="w"> </span>--img-dir<span class="w"> </span>arg<span class="w">      </span>directory<span class="w"> </span>path<span class="w"> </span>which<span class="w"> </span>contains<span class="w"> </span>images
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+--mask<span class="w"> </span>arg<span class="w">             </span>mask<span class="w"> </span>image<span class="w"> </span>path
+--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+--debug<span class="w">                </span>debug<span class="w"> </span>mode
+--eval-log<span class="w">             </span>store<span class="w"> </span>trajectory<span class="w"> </span>and<span class="w"> </span>tracking<span class="w"> </span><span class="nb">times</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>evaluation
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>store<span class="w"> </span>a<span class="w"> </span>map<span class="w"> </span>database<span class="w"> </span>at<span class="w"> </span>this<span class="w"> </span>path<span class="w"> </span>after<span class="w"> </span>SLAM
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">The camera that captures the video file must be calibrated. Create a config file (<code class="docutils literal notranslate"><span class="pre">.yaml</span></code>) according to the camera parameters.</div>
+<div class="line">We provided a vocabulary file for DBoW2 at <a class="reference external" href="https://drive.google.com/open?id=1wUPb328th8bUqhOk-i8xllt5mgRW4n84">here</a>. You can use <code class="docutils literal notranslate"><span class="pre">orb_vocab.dbow2</span></code> in the zip file.</div>
+</div>
+</section>
+<section id="id2">
+<h3>Localization<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>We provided an example snippet for using image sequences for localization based on a prebuilt map.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./example/run_image_localization.cc</span></code>.
+The following options are allowed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_image_localization<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-i,<span class="w"> </span>--img-dir<span class="w"> </span>arg<span class="w">      </span>directory<span class="w"> </span>path<span class="w"> </span>which<span class="w"> </span>contains<span class="w"> </span>images
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>path<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>prebuilt<span class="w"> </span>map<span class="w"> </span>database
+--mapping<span class="w">              </span>perform<span class="w"> </span>mapping<span class="w"> </span>as<span class="w"> </span>well<span class="w"> </span>as<span class="w"> </span>localization
+--mask<span class="w"> </span>arg<span class="w">             </span>mask<span class="w"> </span>image<span class="w"> </span>path
+--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+--debug<span class="w">                </span>debug<span class="w"> </span>mode
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">The camera that captures the video file must be calibrated. Create a config file (<code class="docutils literal notranslate"><span class="pre">.yaml</span></code>) according to the camera parameters.</div>
+<div class="line">We provided a vocabulary file for DBoW2 at <a class="reference external" href="https://drive.google.com/open?id=1wUPb328th8bUqhOk-i8xllt5mgRW4n84">here</a>. You can use <code class="docutils literal notranslate"><span class="pre">orb_vocab.dbow2</span></code> in the zip file.</div>
+</div>
+<p>You can create a map database file by running one of the <code class="docutils literal notranslate"><span class="pre">run_****_slam</span></code> executables with <code class="docutils literal notranslate"><span class="pre">--map-db</span> <span class="pre">map_file_name.msg</span></code> option.</p>
+</section>
+</section>
+<section id="slam-with-standard-datasets">
+<span id="section-example-standard-datasets"></span><h2>SLAM with Standard Datasets<a class="headerlink" href="#slam-with-standard-datasets" title="Link to this heading"></a></h2>
+<section id="kitti-odometry-dataset">
+<span id="subsection-example-kitti"></span><h3>KITTI Odometry dataset<a class="headerlink" href="#kitti-odometry-dataset" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="http://www.cvlibs.net/datasets/kitti/">KITTI Odometry dataset</a> is a benchmarking dataset for monocular and stereo visual odometry and lidar odometry that is captured from car-mounted devices.
+We provided an example source code for running monocular and stereo visual SLAM with this dataset.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./example/run_kitti_slam.cc</span></code>.</p>
+<p>Start by downloading the dataset from <a class="reference external" href="http://www.cvlibs.net/datasets/kitti/eval_odometry.php">here</a>.
+Download the grayscale set (<code class="docutils literal notranslate"><span class="pre">data_odometry_gray.zip</span></code>).</p>
+<p>After downloading and uncompressing it, you will find several sequences under the <code class="docutils literal notranslate"><span class="pre">sequences/</span></code> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w"> </span>sequences/
+<span class="m">00</span><span class="w">  </span><span class="m">01</span><span class="w">  </span><span class="m">02</span><span class="w">  </span><span class="m">03</span><span class="w">  </span><span class="m">04</span><span class="w">  </span><span class="m">05</span><span class="w">  </span><span class="m">06</span><span class="w">  </span><span class="m">07</span><span class="w">  </span><span class="m">08</span><span class="w">  </span><span class="m">09</span><span class="w">  </span><span class="m">10</span><span class="w">  </span><span class="m">11</span><span class="w">  </span><span class="m">12</span><span class="w">  </span><span class="m">13</span><span class="w">  </span><span class="m">14</span><span class="w">  </span><span class="m">15</span><span class="w">  </span><span class="m">16</span><span class="w">  </span><span class="m">17</span><span class="w">  </span><span class="m">18</span><span class="w">  </span><span class="m">19</span><span class="w">  </span><span class="m">20</span><span class="w">  </span><span class="m">21</span>
+</pre></div>
+</div>
+<p>In addition, download a vocabulary file for DBoW2 from <a class="reference external" href="https://drive.google.com/open?id=1wUPb328th8bUqhOk-i8xllt5mgRW4n84">here</a> and uncompress it.
+You can find <code class="docutils literal notranslate"><span class="pre">orb_vocab.dbow2</span></code> in the zip file.</p>
+<p>A configuration file for each sequence is contained under <code class="docutils literal notranslate"><span class="pre">./example/kitti/</span></code>.</p>
+<p>If you built examples with Pangolin Viewer support, a map viewer and frame viewer will be launced right after executing the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># at the build directory of OpenVSLAM</span>
+$<span class="w"> </span>ls
+...
+run_kitti_slam
+...
+<span class="c1"># monocular SLAM with sequence 00</span>
+$<span class="w"> </span>./run_kitti_slam<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/orb_vocab/orb_vocab.dbow2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>/path/to/KITTI/Odometry/sequences/00/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>../example/kitti/KITTI_mono_00-02.yaml
+<span class="c1"># stereo SLAM with sequence 05</span>
+$<span class="w"> </span>./run_kitti_slam<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/orb_vocab/orb_vocab.dbow2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>/path/to/KITTI/Odometry/sequences/05/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>../example/kitti/KITTI_stereo_04-12.yaml
+</pre></div>
+</div>
+<p>The following options are allowed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_kitti_slam<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-d,<span class="w"> </span>--data-dir<span class="w"> </span>arg<span class="w">     </span>directory<span class="w"> </span>path<span class="w"> </span>which<span class="w"> </span>contains<span class="w"> </span>dataset
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+--debug<span class="w">                </span>debug<span class="w"> </span>mode
+--eval-log<span class="w">             </span>store<span class="w"> </span>trajectory<span class="w"> </span>and<span class="w"> </span>tracking<span class="w"> </span><span class="nb">times</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>evaluation
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>store<span class="w"> </span>a<span class="w"> </span>map<span class="w"> </span>database<span class="w"> </span>at<span class="w"> </span>this<span class="w"> </span>path<span class="w"> </span>after<span class="w"> </span>SLAM
+</pre></div>
+</div>
+</section>
+<section id="euroc-mav-dataset">
+<span id="subsection-example-euroc"></span><h3>EuRoC MAV dataset<a class="headerlink" href="#euroc-mav-dataset" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets">EuRoC MAV dataset</a> is a benchmarking dataset for monocular and stereo visual odometry that is captured from drone-mounted devices.
+We provide an example source code for running monocular and stereo visual SLAM with this dataset.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./example/run_euroc_slam.cc</span></code>.</p>
+<p>Start by downloading the dataset from <a class="reference external" href="http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/">here</a>.
+Download the <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file of a dataset you plan on using.</p>
+<p>After downloading and uncompressing it, you will find several directories under the <code class="docutils literal notranslate"><span class="pre">mav0/</span></code> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w"> </span>mav0/
+body.yaml<span class="w">  </span>cam0<span class="w">  </span>cam1<span class="w">  </span>imu0<span class="w">  </span>leica0<span class="w">  </span>state_groundtruth_estimate0
+</pre></div>
+</div>
+<p>In addition, download a vocabulary file for DBoW2 from <a class="reference external" href="https://drive.google.com/open?id=1wUPb328th8bUqhOk-i8xllt5mgRW4n84">here</a> and uncompress it.
+You can find <code class="docutils literal notranslate"><span class="pre">orb_vocab.dbow2</span></code> in the zip file.</p>
+<p>We provided the two config files for EuRoC, <code class="docutils literal notranslate"><span class="pre">./example/euroc/EuRoC_mono.yaml</span></code> for monocular and <code class="docutils literal notranslate"><span class="pre">./example/euroc/EuRoC_stereo.yaml</span></code> for stereo.</p>
+<p>If you have built examples with Pangolin Viewer support, a map viewer and frame viewer will be launched right after executing the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># at the build directory of OpenVSLAM</span>
+$<span class="w"> </span>ls
+...
+run_euroc_slam
+...
+<span class="c1"># monocular SLAM with any EuRoC sequence</span>
+$<span class="w"> </span>./run_euroc_slam<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/orb_vocab/orb_vocab.dbow2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>/path/to/EuRoC/MAV/mav0/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>../example/euroc/EuRoC_mono.yaml
+<span class="c1"># stereo SLAM with any EuRoC sequence</span>
+$<span class="w"> </span>./run_euroc_slam<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/orb_vocab/orb_vocab.dbow2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>/path/to/EuRoC/MAV/mav0/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>../example/euroc/EuRoC_stereo.yaml
+</pre></div>
+</div>
+<p>The following options are allowed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_euroc_slam<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-d,<span class="w"> </span>--data-dir<span class="w"> </span>arg<span class="w">     </span>directory<span class="w"> </span>path<span class="w"> </span>which<span class="w"> </span>contains<span class="w"> </span>dataset
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+--debug<span class="w">                </span>debug<span class="w"> </span>mode
+--eval-log<span class="w">             </span>store<span class="w"> </span>trajectory<span class="w"> </span>and<span class="w"> </span>tracking<span class="w"> </span><span class="nb">times</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>evaluation
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>store<span class="w"> </span>a<span class="w"> </span>map<span class="w"> </span>database<span class="w"> </span>at<span class="w"> </span>this<span class="w"> </span>path<span class="w"> </span>after<span class="w"> </span>SLAM
+</pre></div>
+</div>
+</section>
+<section id="tum-rgbd-dataset">
+<span id="subsection-example-tum-rgbd"></span><h3>TUM RGBD dataset<a class="headerlink" href="#tum-rgbd-dataset" title="Link to this heading"></a></h3>
+<p>Will be written soon.</p>
+<p>The following options are allowed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_tum_slam<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-d,<span class="w"> </span>--data-dir<span class="w"> </span>arg<span class="w">     </span>directory<span class="w"> </span>path<span class="w"> </span>which<span class="w"> </span>contains<span class="w"> </span>dataset
+-a,<span class="w"> </span>--assoc<span class="w"> </span>arg<span class="w">        </span>association<span class="w"> </span>file<span class="w"> </span>path
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+--debug<span class="w">                </span>debug<span class="w"> </span>mode
+--eval-log<span class="w">             </span>store<span class="w"> </span>trajectory<span class="w"> </span>and<span class="w"> </span>tracking<span class="w"> </span><span class="nb">times</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>evaluation
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>store<span class="w"> </span>a<span class="w"> </span>map<span class="w"> </span>database<span class="w"> </span>at<span class="w"> </span>this<span class="w"> </span>path<span class="w"> </span>after<span class="w"> </span>SLAM
+</pre></div>
+</div>
+</section>
+</section>
+<section id="slam-with-uvc-camera">
+<span id="section-example-uvc-camera"></span><h2>SLAM with UVC camera<a class="headerlink" href="#slam-with-uvc-camera" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3>Tracking and Mapping<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>We provided an example snippet for using a UVC camera, which is often called a webcam, for visual SLAM.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./example/run_camera_slam.cc</span></code>.
+The following options are allowed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_camera_slam<span class="w">  </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">            </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">       </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-n,<span class="w"> </span>--number<span class="w"> </span>arg<span class="w">      </span>camera<span class="w"> </span>number
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">      </span>config<span class="w"> </span>file<span class="w"> </span>path
+--mask<span class="w"> </span>arg<span class="w">            </span>mask<span class="w"> </span>image<span class="w"> </span>path
+-s,<span class="w"> </span>--scale<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>scaling<span class="w"> </span>ratio<span class="w"> </span>of<span class="w"> </span>images
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">      </span>store<span class="w"> </span>a<span class="w"> </span>map<span class="w"> </span>database<span class="w"> </span>at<span class="w"> </span>this<span class="w"> </span>path<span class="w"> </span>after<span class="w"> </span>SLAM
+--debug<span class="w">               </span>debug<span class="w"> </span>mode
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Please specify the camera number you want to use by <code class="docutils literal notranslate"><span class="pre">-n</span></code> option.</div>
+<div class="line">The camera must be calibrated. Create a config file (<code class="docutils literal notranslate"><span class="pre">.yaml</span></code>) according to the camera parameters.</div>
+<div class="line">You can scale input images to the performance of your machine by <code class="docutils literal notranslate"><span class="pre">-s</span></code> option. Please modify the config accordingly.</div>
+<div class="line">We provided a vocabulary file for DBoW2 at <a class="reference external" href="https://drive.google.com/open?id=1wUPb328th8bUqhOk-i8xllt5mgRW4n84">here</a>. You can use <code class="docutils literal notranslate"><span class="pre">orb_vocab.dbow2</span></code> in the zip file.</div>
+</div>
+</section>
+<section id="id6">
+<h3>Localization<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>We provided an example snippet for using a UVC camera for localization based on a prebuilt map.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./example/run_camera_localization.cc</span></code>.
+The following options are allowed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_camera_localization<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+-h,<span class="w"> </span>--help<span class="w">            </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">       </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+-n,<span class="w"> </span>--number<span class="w"> </span>arg<span class="w">      </span>camera<span class="w"> </span>number
+-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">      </span>config<span class="w"> </span>file<span class="w"> </span>path
+--mask<span class="w"> </span>arg<span class="w">            </span>mask<span class="w"> </span>image<span class="w"> </span>path
+-s,<span class="w"> </span>--scale<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>scaling<span class="w"> </span>ratio<span class="w"> </span>of<span class="w"> </span>images
+-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">      </span>path<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>prebuilt<span class="w"> </span>map<span class="w"> </span>database
+--mapping<span class="w">             </span>perform<span class="w"> </span>mapping<span class="w"> </span>as<span class="w"> </span>well<span class="w"> </span>as<span class="w"> </span>localization
+--debug<span class="w">               </span>debug<span class="w"> </span>mode
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Please specify the camera number you want to use by <code class="docutils literal notranslate"><span class="pre">-n</span></code> option.</div>
+<div class="line">The camera must be calibrated. Create a config file (<code class="docutils literal notranslate"><span class="pre">.yaml</span></code>) according to the camera parameters.</div>
+<div class="line">You can scale input images to the performance of your machine by <code class="docutils literal notranslate"><span class="pre">-s</span></code> option. Please modify the config accordingly.</div>
+<div class="line">We provided a vocabulary file for DBoW2 at <a class="reference external" href="https://drive.google.com/open?id=1wUPb328th8bUqhOk-i8xllt5mgRW4n84">here</a>. You can use <code class="docutils literal notranslate"><span class="pre">orb_vocab.dbow2</span></code> in the zip file.</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="simple_tutorial.html" class="btn btn-neutral float-left" title="Simple Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="docker.html" class="btn btn-neutral float-right" title="Running on Docker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, National Institute of Advanced Industrial Science and Technology (AIST).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Tutorial &mdash; OpenVSLAM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Example" href="example.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            OpenVSLAM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Simple Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tl-dr">TL; DR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sample-datasets">Sample Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#equirectangular-datasets">Equirectangular Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fisheye-datasets">Fisheye Datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tracking-and-mapping">Tracking and Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#localization">Localization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Running on Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros_package.html">ROS Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trouble_shooting.html">Trouble Shooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OpenVSLAM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Simple Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/simple_tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="simple-tutorial">
+<span id="chapter-simple-tutorial"></span><h1>Simple Tutorial<a class="headerlink" href="#simple-tutorial" title="Link to this heading"></a></h1>
+<section id="tl-dr">
+<h2>TL; DR<a class="headerlink" href="#tl-dr" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use <a class="reference internal" href="installation.html#subsection-dependencies-socketviewer"><span class="std std-ref">SocketViewer</span></a>, please launch the server in the other terminal and access to it with the web browser <strong>in advance</strong>.</p>
+</div>
+<p>Running the following commands will give a feel for what OpenVSLAM can do.
+The later parts of this chapter explains what each of the commands do in more detail.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># at the build directory of openvslam ...</span>
+$<span class="w"> </span><span class="nb">pwd</span>
+/path/to/openvslam/build/
+$<span class="w"> </span>ls
+run_video_slam<span class="w">   </span>run_video_localization<span class="w">   </span>lib/<span class="w">   </span>...
+
+<span class="c1"># download an ORB vocabulary from Google Drive</span>
+<span class="nv">FILE_ID</span><span class="o">=</span><span class="s2">&quot;1wUPb328th8bUqhOk-i8xllt5mgRW4n84&quot;</span>
+curl<span class="w"> </span>-sc<span class="w"> </span>/tmp/cookie<span class="w"> </span><span class="s2">&quot;https://drive.google.com/uc?export=download&amp;id=</span><span class="si">${</span><span class="nv">FILE_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<span class="nv">CODE</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>awk<span class="w"> </span><span class="s1">&#39;/_warning_/ {print $NF}&#39;</span><span class="w"> </span>/tmp/cookie<span class="k">)</span><span class="s2">&quot;</span>
+curl<span class="w"> </span>-sLb<span class="w"> </span>/tmp/cookie<span class="w"> </span><span class="s2">&quot;https://drive.google.com/uc?export=download&amp;confirm=</span><span class="si">${</span><span class="nv">CODE</span><span class="si">}</span><span class="s2">&amp;id=</span><span class="si">${</span><span class="nv">FILE_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>-o<span class="w"> </span>orb_vocab.zip
+unzip<span class="w"> </span>orb_vocab.zip
+
+<span class="c1"># download a sample dataset from Google Drive</span>
+<span class="nv">FILE_ID</span><span class="o">=</span><span class="s2">&quot;1d8kADKWBptEqTF7jEVhKatBEdN7g0ikY&quot;</span>
+curl<span class="w"> </span>-sc<span class="w"> </span>/tmp/cookie<span class="w"> </span><span class="s2">&quot;https://drive.google.com/uc?export=download&amp;id=</span><span class="si">${</span><span class="nv">FILE_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<span class="nv">CODE</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>awk<span class="w"> </span><span class="s1">&#39;/_warning_/ {print $NF}&#39;</span><span class="w"> </span>/tmp/cookie<span class="k">)</span><span class="s2">&quot;</span>
+curl<span class="w"> </span>-sLb<span class="w"> </span>/tmp/cookie<span class="w"> </span><span class="s2">&quot;https://drive.google.com/uc?export=download&amp;confirm=</span><span class="si">${</span><span class="nv">CODE</span><span class="si">}</span><span class="s2">&amp;id=</span><span class="si">${</span><span class="nv">FILE_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>-o<span class="w"> </span>aist_living_lab_1.zip
+unzip<span class="w"> </span>aist_living_lab_1.zip
+
+<span class="c1"># download a sample dataset from Google Drive</span>
+<span class="nv">FILE_ID</span><span class="o">=</span><span class="s2">&quot;1TVf2D2QvMZPHsFoTb7HNxbXclPoFMGLX&quot;</span>
+curl<span class="w"> </span>-sc<span class="w"> </span>/tmp/cookie<span class="w"> </span><span class="s2">&quot;https://drive.google.com/uc?export=download&amp;id=</span><span class="si">${</span><span class="nv">FILE_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<span class="nv">CODE</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>awk<span class="w"> </span><span class="s1">&#39;/_warning_/ {print $NF}&#39;</span><span class="w"> </span>/tmp/cookie<span class="k">)</span><span class="s2">&quot;</span>
+curl<span class="w"> </span>-sLb<span class="w"> </span>/tmp/cookie<span class="w"> </span><span class="s2">&quot;https://drive.google.com/uc?export=download&amp;confirm=</span><span class="si">${</span><span class="nv">CODE</span><span class="si">}</span><span class="s2">&amp;id=</span><span class="si">${</span><span class="nv">FILE_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>-o<span class="w"> </span>aist_living_lab_2.zip
+unzip<span class="w"> </span>aist_living_lab_2.zip
+
+<span class="c1"># run tracking and mapping</span>
+./run_video_slam<span class="w"> </span>-v<span class="w"> </span>./orb_vocab/orb_vocab.dbow2<span class="w"> </span>-m<span class="w"> </span>./aist_living_lab_1/video.mp4<span class="w"> </span>-c<span class="w"> </span>./aist_living_lab_1/config.yaml<span class="w"> </span>--frame-skip<span class="w"> </span><span class="m">3</span><span class="w"> </span>--no-sleep<span class="w"> </span>--map-db<span class="w"> </span>map.msg
+<span class="c1"># click the [Terminate] button to close the viewer</span>
+<span class="c1"># you can find map.msg in the current directory</span>
+
+<span class="c1"># run localization</span>
+./run_video_localization<span class="w"> </span>-v<span class="w"> </span>./orb_vocab/orb_vocab.dbow2<span class="w"> </span>-m<span class="w"> </span>./aist_living_lab_2/video.mp4<span class="w"> </span>-c<span class="w"> </span>./aist_living_lab_2/config.yaml<span class="w"> </span>--frame-skip<span class="w"> </span><span class="m">3</span><span class="w"> </span>--no-sleep<span class="w"> </span>--map-db<span class="w"> </span>map.msg
+</pre></div>
+</div>
+</section>
+<section id="sample-datasets">
+<h2>Sample Datasets<a class="headerlink" href="#sample-datasets" title="Link to this heading"></a></h2>
+<p>You can use OpenVSLAM with various video datasets.
+If you want to run OpenVSLAM with standard benchmarking detasets, please see <a class="reference internal" href="example.html#section-example-standard-datasets"><span class="std std-ref">this section</span></a>.</p>
+<p>Start by downloading some datasets you like.</p>
+<section id="equirectangular-datasets">
+<h3>Equirectangular Datasets<a class="headerlink" href="#equirectangular-datasets" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.8%" />
+<col style="width: 30.8%" />
+<col style="width: 7.7%" />
+<col style="width: 30.8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>name</p></th>
+<th class="head"><p>camera model</p></th>
+<th class="head"><p>length</p></th>
+<th class="head"><p>download link</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>aist_entrance_hall_1</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>0:54</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_entrance_hall_2</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>0:54</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>aist_factory_A_1</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>1:55</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_factory_A_2</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>1:54</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>aist_factory_B_1</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>1:04</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_factory_B_2</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>1:34</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>aist_living_lab_1</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>2:16</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_living_lab_2</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>1:47</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>aist_living_lab_3</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>2:06</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_stairs_A_1</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>2:27</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>aist_stairs_B_1</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>2:55</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_store_1</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>1:12</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>aist_store_2</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>1:44</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_store_3</p></td>
+<td><p>equirectangular (mono)</p></td>
+<td><p>1:18</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4">link</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fisheye-datasets">
+<h3>Fisheye Datasets<a class="headerlink" href="#fisheye-datasets" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.8%" />
+<col style="width: 30.8%" />
+<col style="width: 7.7%" />
+<col style="width: 30.8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>name</p></th>
+<th class="head"><p>camera model</p></th>
+<th class="head"><p>length</p></th>
+<th class="head"><p>download link</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>aist_entrance_hall_1</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>1:05</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_entrance_hall_2</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>1:06</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>aist_entrance_hall_3</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>1:23</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_entrance_hall_4</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>1:27</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>aist_living_lab_1</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>1:20</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>aist_living_lab_2</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>2:26</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>aist_living_lab_3</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>3:43</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>nu_eng2_corridor_1</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>2:56</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+<tr class="row-even"><td><p>nu_eng2_corridor_2</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>2:45</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>nu_eng2_corridor_3</p></td>
+<td><p>fisheye (mono)</p></td>
+<td><p>2:04</p></td>
+<td><p><a class="reference external" href="https://drive.google.com/open?id=1SVDsgz-ydm1pAbrdmhRQTmWhJnUl_xr8">link</a></p></td>
+</tr>
+</tbody>
+</table>
+<p>After downloading and uncompressing a zip file, you will find a video file and a config file under the uncompressed directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w"> </span>dataset_name_X/
+config.yaml<span class="w">  </span>video.mp4
+</pre></div>
+</div>
+<p>You can put the dataset in any directory where you have access to.</p>
+<div class="line-block">
+<div class="line">Additionally, please download a vocabulary file for DBoW2 from <a class="reference external" href="https://drive.google.com/open?id=1wUPb328th8bUqhOk-i8xllt5mgRW4n84">here</a>.</div>
+<div class="line">After uncompressing it, you will find <code class="docutils literal notranslate"><span class="pre">orb_vocab.dbow2</span></code>.</div>
+</div>
+<p>For the rest of this chapter, we will use <code class="docutils literal notranslate"><span class="pre">aist_living_lab_1</span></code> and <code class="docutils literal notranslate"><span class="pre">aist_living_lab_2</span></code> datasets for our example.</p>
+</section>
+</section>
+<section id="tracking-and-mapping">
+<h2>Tracking and Mapping<a class="headerlink" href="#tracking-and-mapping" title="Link to this heading"></a></h2>
+<p>Here we should know how to run SLAM and create a map database file with <code class="docutils literal notranslate"><span class="pre">aist_living_lab_1</span></code> dataset.
+You can use <code class="docutils literal notranslate"><span class="pre">./run_video_slam</span></code> to run SLAM with the video file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># at the build directory of OpenVSLAM</span>
+$<span class="w"> </span>ls
+...
+run_video_slam
+...
+$<span class="w"> </span>./run_video_slam<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+<span class="w">  </span>-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+<span class="w">  </span>-m,<span class="w"> </span>--video<span class="w"> </span>arg<span class="w">        </span>video<span class="w"> </span>file<span class="w"> </span>path
+<span class="w">  </span>-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+<span class="w">  </span>--mask<span class="w"> </span>arg<span class="w">             </span>mask<span class="w"> </span>image<span class="w"> </span>path
+<span class="w">  </span>--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+<span class="w">  </span>--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+<span class="w">  </span>--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+<span class="w">  </span>--debug<span class="w">                </span>debug<span class="w"> </span>mode
+<span class="w">  </span>--eval-log<span class="w">             </span>store<span class="w"> </span>trajectory<span class="w"> </span>and<span class="w"> </span>tracking<span class="w"> </span><span class="nb">times</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>evaluation
+<span class="w">  </span>-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>store<span class="w"> </span>a<span class="w"> </span>map<span class="w"> </span>database<span class="w"> </span>at<span class="w"> </span>this<span class="w"> </span>path<span class="w"> </span>after<span class="w"> </span>SLAM
+</pre></div>
+</div>
+<p>Execute the following command to run SLAM.
+The paths should be changed accordingly.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_video_slam<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/orb_vocab/orb_vocab.dbow2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>/path/to/aist_living_lab_1/config.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-m<span class="w"> </span>/path/to/aist_living_lab_1/video.mp4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--frame-skip<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--map-db<span class="w"> </span>aist_living_lab_1_map.msg
+</pre></div>
+</div>
+<p>The frame viewer and map viewer should launch as well.
+If the two viewers are not launching correctly, check if you launched the command with the appropriate paths.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If OpenVSLAM terminates abnormaly soon after initialization, rebuild g2o and OpenVSLAM with <code class="docutils literal notranslate"><span class="pre">-DBUILD_WITH_MARCH_NATIVE=OFF</span></code> option for <code class="docutils literal notranslate"><span class="pre">cmake</span></code> configulation.</p>
+</div>
+<a class="reference internal image-reference" href="_images/slam_frame_viewer_1.png"><img alt="_images/slam_frame_viewer_1.png" class="align-center" src="_images/slam_frame_viewer_1.png" style="width: 640px;" />
+</a>
+<a class="reference internal image-reference" href="_images/slam_map_viewer_1.png"><img alt="_images/slam_map_viewer_1.png" class="align-center" src="_images/slam_map_viewer_1.png" style="width: 640px;" />
+</a>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[2019-05-20 17:52:41.677] [I] config file loaded: /path/to/aist_living_lab_1/aist_living_lab_1/config.yaml
+  ___               __   _____ _      _   __  __
+ / _ \ _ __  ___ _ _\ \ / / __| |    /_\ |  \/  |
+| (_) | &#39;_ \/ -_) &#39; \\ V /\__ \ |__ / _ \| |\/| |
+ \___/| .__/\___|_||_|\_/ |___/____/_/ \_\_|  |_|
+      |_|
+
+Copyright (C) 2019,
+National Institute of Advanced Industrial Science and Technology (AIST)
+All rights reserved.
+
+This is free software,
+and you are welcome to redistribute it under certain conditions.
+See the LICENSE file.
+
+Camera Configuration:
+- name: RICOH THETA S 960
+- setup: Monocular
+- fps: 30
+- cols: 1920
+- rows: 960
+- color: RGB
+- model: Equirectangular
+ORB Configuration:
+- number of keypoints: 2000
+- scale factor: 1.2
+- number of levels: 8
+- initial fast threshold: 20
+- minimum fast threshold: 7
+- edge threshold: 19
+- patch size: 31
+- half patch size: 15
+- mask rectangles:
+  - [0, 1, 0, 0.1]
+  - [0, 1, 0.84, 1]
+  - [0, 0.2, 0.7, 1]
+  - [0.8, 1, 0.7, 1]
+Tracking Configuration:
+
+[2019-05-20 17:52:41.678] [I] loading ORB vocabulary: /path/to/orb_vocab/orb_vocab.dbow2
+[2019-05-20 17:52:42.037] [I] startup SLAM system
+[2019-05-20 17:52:42.038] [I] start local mapper
+[2019-05-20 17:52:42.038] [I] start loop closer
+[2019-05-20 17:52:42.395] [I] initialization succeeded with E
+[2019-05-20 17:52:42.424] [I] new map created with 191 points: frame 0 - frame 2
+[2019-05-20 17:53:39.092] [I] detect loop: keyframe 36 - keyframe 139
+[2019-05-20 17:53:39.094] [I] pause local mapper
+[2019-05-20 17:53:39.303] [I] resume local mapper
+[2019-05-20 17:53:39.303] [I] start loop bundle adjustment
+[2019-05-20 17:53:40.186] [I] finish loop bundle adjustment
+[2019-05-20 17:53:40.186] [I] updating map with pose propagation
+[2019-05-20 17:53:40.194] [I] pause local mapper
+[2019-05-20 17:53:40.199] [I] resume local mapper
+[2019-05-20 17:53:40.199] [I] updated map
+[2019-05-20 17:55:36.218] [I] shutdown SLAM system
+[2019-05-20 17:55:36.218] [I] encoding 1 camera(s) to store
+[2019-05-20 17:55:36.218] [I] encoding 301 keyframes to store
+[2019-05-20 17:55:37.906] [I] encoding 19900 landmarks to store
+[2019-05-20 17:55:38.819] [I] save the MessagePack file of database to aist_living_lab_1_map.msg
+median tracking time: 0.045391[s]
+mean tracking time: 0.0472221[s]
+[2019-05-20 17:55:40.087] [I] clear BoW database
+[2019-05-20 17:55:40.284] [I] clear map database
+</pre></div>
+</div>
+<p>Please click the <strong>Terminate</strong> button to close the viewer.</p>
+<p>After terminating, you will find a map database file <code class="docutils literal notranslate"><span class="pre">aist_living_lab_1_map.msg</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls
+...
+aist_living_lab_1_map.msg
+...
+</pre></div>
+</div>
+<p>The format of map database files is <a class="reference external" href="https://msgpack.org/">MessagePack</a>, so you can reuse created maps for any third-party applications other than OpenVSLAM.</p>
+</section>
+<section id="localization">
+<h2>Localization<a class="headerlink" href="#localization" title="Link to this heading"></a></h2>
+<p>In this section, we will localize the frames in <code class="docutils literal notranslate"><span class="pre">aist_living_lab_2</span></code> dataset using the created map file <code class="docutils literal notranslate"><span class="pre">aist_living_lab_1_map.msg</span></code>.
+You can use <code class="docutils literal notranslate"><span class="pre">./run_video_localization</span></code> to run localization.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_video_localization<span class="w"> </span>-h
+Allowed<span class="w"> </span>options:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">             </span>produce<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message
+<span class="w">  </span>-v,<span class="w"> </span>--vocab<span class="w"> </span>arg<span class="w">        </span>vocabulary<span class="w"> </span>file<span class="w"> </span>path
+<span class="w">  </span>-m,<span class="w"> </span>--video<span class="w"> </span>arg<span class="w">        </span>video<span class="w"> </span>file<span class="w"> </span>path
+<span class="w">  </span>-c,<span class="w"> </span>--config<span class="w"> </span>arg<span class="w">       </span>config<span class="w"> </span>file<span class="w"> </span>path
+<span class="w">  </span>-p,<span class="w"> </span>--map-db<span class="w"> </span>arg<span class="w">       </span>path<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>prebuilt<span class="w"> </span>map<span class="w"> </span>database
+<span class="w">  </span>--mapping<span class="w">              </span>perform<span class="w"> </span>mapping<span class="w"> </span>as<span class="w"> </span>well<span class="w"> </span>as<span class="w"> </span>localization
+<span class="w">  </span>--mask<span class="w"> </span>arg<span class="w">             </span>mask<span class="w"> </span>image<span class="w"> </span>path
+<span class="w">  </span>--frame-skip<span class="w"> </span>arg<span class="w"> </span><span class="o">(=</span><span class="m">1</span><span class="o">)</span><span class="w">  </span>interval<span class="w"> </span>of<span class="w"> </span>frame<span class="w"> </span>skip
+<span class="w">  </span>--no-sleep<span class="w">             </span>not<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>next<span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span>real<span class="w"> </span><span class="nb">time</span>
+<span class="w">  </span>--auto-term<span class="w">            </span>automatically<span class="w"> </span>terminate<span class="w"> </span>the<span class="w"> </span>viewer
+<span class="w">  </span>--debug<span class="w">                </span>debug<span class="w"> </span>mode
+</pre></div>
+</div>
+<p>Execute the following command to start localization.
+The paths should be changed accordingly.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./run_video_localization<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/orb_vocab/orb_vocab.dbow2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>/path/to/aist_living_lab_2/config.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-m<span class="w"> </span>/path/to/aist_living_lab_2/video.mp4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--frame-skip<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--map-db<span class="w"> </span>aist_living_lab_1_map.msg
+</pre></div>
+</div>
+<p>The frame viewer and map viewer should launch as well.
+If the two viewers are not launching correctly, check if you launched the command with the appropriate paths.</p>
+<p>You can see if the current frame is being localized, based on the prebuild map.</p>
+<a class="reference internal image-reference" href="_images/localize_frame_viewer_1.png"><img alt="_images/localize_frame_viewer_1.png" class="align-center" src="_images/localize_frame_viewer_1.png" style="width: 640px;" />
+</a>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[2019-05-20 17:58:54.728] [I] config file loaded: /path/to/aist_living_lab_2/config.yaml
+  ___               __   _____ _      _   __  __
+ / _ \ _ __  ___ _ _\ \ / / __| |    /_\ |  \/  |
+| (_) | &#39;_ \/ -_) &#39; \\ V /\__ \ |__ / _ \| |\/| |
+ \___/| .__/\___|_||_|\_/ |___/____/_/ \_\_|  |_|
+      |_|
+
+Copyright (C) 2019,
+National Institute of Advanced Industrial Science and Technology (AIST)
+All rights reserved.
+
+This is free software,
+and you are welcome to redistribute it under certain conditions.
+See the LICENSE file.
+
+Camera Configuration:
+- name: RICOH THETA S 960
+- setup: Monocular
+- fps: 30
+- cols: 1920
+- rows: 960
+- color: RGB
+- model: Equirectangular
+ORB Configuration:
+- number of keypoints: 2000
+- scale factor: 1.2
+- number of levels: 8
+- initial fast threshold: 20
+- minimum fast threshold: 7
+- edge threshold: 19
+- patch size: 31
+- half patch size: 15
+- mask rectangles:
+  - [0, 1, 0, 0.1]
+  - [0, 1, 0.84, 1]
+  - [0, 0.2, 0.7, 1]
+  - [0.8, 1, 0.7, 1]
+Tracking Configuration:
+
+[2019-05-20 17:58:54.729] [I] loading ORB vocabulary: /path/to/orb_vocab/orb_vocab.dbow2
+[2019-05-20 17:58:55.083] [I] clear map database
+[2019-05-20 17:58:55.083] [I] clear BoW database
+[2019-05-20 17:58:55.083] [I] load the MessagePack file of database from aist_living_lab_1_map.msg
+[2019-05-20 17:58:57.832] [I] decoding 1 camera(s) to load
+[2019-05-20 17:58:57.832] [I] load the tracking camera &quot;RICOH THETA S 960&quot; from JSON
+[2019-05-20 17:58:58.204] [I] decoding 301 keyframes to load
+[2019-05-20 17:59:02.013] [I] decoding 19900 landmarks to load
+[2019-05-20 17:59:02.036] [I] registering essential graph
+[2019-05-20 17:59:02.564] [I] registering keyframe-landmark association
+[2019-05-20 17:59:03.161] [I] updating covisibility graph
+[2019-05-20 17:59:03.341] [I] updating landmark geometry
+[2019-05-20 17:59:04.189] [I] startup SLAM system
+[2019-05-20 17:59:04.190] [I] start local mapper
+[2019-05-20 17:59:04.191] [I] start loop closer
+[2019-05-20 17:59:04.195] [I] pause local mapper
+[2019-05-20 17:59:04.424] [I] relocalization succeeded
+[2019-05-20 18:01:12.387] [I] shutdown SLAM system
+median tracking time: 0.0370831[s]
+mean tracking time: 0.0384683[s]
+[2019-05-20 18:01:12.390] [I] clear BoW database
+[2019-05-20 18:01:12.574] [I] clear map database
+</pre></div>
+</div>
+<p>If you set the <code class="docutils literal notranslate"><span class="pre">--mapping</span></code> option, the mapping module is enabled to extend the prebuild map.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example.html" class="btn btn-neutral float-right" title="Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, National Institute of Advanced Industrial Science and Technology (AIST).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

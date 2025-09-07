@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS Package &mdash; OpenVSLAM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Trouble Shooting" href="trouble_shooting.html" />
+    <link rel="prev" title="Running on Docker" href="docker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            OpenVSLAM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_tutorial.html">Simple Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Running on Docker</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ROS Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-instructions">Build Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#publisher">Publisher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#publish-a-video-file">Publish a Video File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#publish-a-image-sequence">Publish a Image Sequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#publish-images-of-a-usb-camera">Publish Images of a USB Camera</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#subscriber">Subscriber</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tracking-and-mapping">Tracking and Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#localization">Localization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trouble_shooting.html">Trouble Shooting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OpenVSLAM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ROS Package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ros_package.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-package">
+<span id="chapter-ros-package"></span><h1>ROS Package<a class="headerlink" href="#ros-package" title="Link to this heading"></a></h1>
+<p>We provide ROS package examples to help you run OpenVSLAM on ROS framework.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please build OpenVSLAM with <strong>OpenCV 3.3.1 or later</strong> if you plan on using ROS package.
+OpenCV 4.x is not supported yet.</p>
+</div>
+<section id="installation">
+<span id="section-installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<section id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="http://wiki.ros.org/">ROS</a> : Please use the version <code class="docutils literal notranslate"><span class="pre">kinetic</span></code> or later.</p></li>
+<li><p><a class="reference internal" href="installation.html#chapter-installation"><span class="std std-ref">OpenVSLAM</span></a> : Please build it with <strong>OpenCV 3.x</strong>.</p></li>
+<li><p><a class="reference external" href="http://wiki.ros.org/image_transport">image_transport</a> : Required by this ROS package examples.</p></li>
+<li><p><a class="reference external" href="http://wiki.ros.org/cv_bridge">cv_bridge</a> : Please build it with the same version of OpenCV used in OpenVSLAM. (<strong>We recommend building it from source.</strong>)</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<span id="section-prerequisites"></span><h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
+<p>Tested for <strong>Ubuntu 16.04</strong>.</p>
+<p>Please install the following dependencies.</p>
+<ul class="simple">
+<li><p>ROS : Please follow <a class="reference external" href="http://wiki.ros.org/ROS/Installation">Installation of ROS</a>.</p></li>
+<li><p>OpenVSLAM : Please follow <a class="reference internal" href="installation.html#chapter-installation"><span class="std std-ref">Installation of OpenVSLAM</span></a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please build OpenVSLAM with PangolinViewer or SocketViewer if you plan on using it for the examples.</p>
+</div>
+<p>Install the dependencies via <code class="docutils literal notranslate"><span class="pre">apt</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt<span class="w"> </span>update<span class="w"> </span>-y
+apt<span class="w"> </span>install<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-image-transport
+</pre></div>
+</div>
+<p>Download the source of <code class="docutils literal notranslate"><span class="pre">cv_bridge</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam/ros
+git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span><span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span><span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/ros-perception/vision_opencv.git
+cp<span class="w"> </span>-r<span class="w"> </span>vision_opencv/cv_bridge<span class="w"> </span>src/
+rm<span class="w"> </span>-rf<span class="w"> </span>vision_opencv
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We recommend building <code class="docutils literal notranslate"><span class="pre">cv_bridge</span></code> from the source even if it has been installed via <code class="docutils literal notranslate"><span class="pre">apt</span></code>.</p>
+</div>
+</section>
+<section id="build-instructions">
+<h3>Build Instructions<a class="headerlink" href="#build-instructions" title="Link to this heading"></a></h3>
+<p>When building with support for PangolinViewer, please specify the following cmake options: <code class="docutils literal notranslate"><span class="pre">-DUSE_PANGOLIN_VIEWER=ON</span></code> and <code class="docutils literal notranslate"><span class="pre">-DUSE_SOCKET_PUBLISHER=OFF</span></code> as described in <a class="reference internal" href="installation.html#section-build-unix"><span class="std std-ref">build of OpenVSLAM</span></a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam/ros
+catkin_make<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_WITH_MARCH_NATIVE<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_PANGOLIN_VIEWER<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_SOCKET_PUBLISHER<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_STACK_TRACE_LOGGER<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBOW_FRAMEWORK<span class="o">=</span>DBoW2
+</pre></div>
+</div>
+<p>Alternatively, when building with support for SocketViewer, please specify the following cmake options: <code class="docutils literal notranslate"><span class="pre">-DUSE_PANGOLIN_VIEWER=OFF</span></code> and <code class="docutils literal notranslate"><span class="pre">-DUSE_SOCKET_PUBLISHER=ON</span></code> as described in <a class="reference internal" href="installation.html#section-build-unix"><span class="std std-ref">build of OpenVSLAM</span></a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/openvslam/ros
+catkin_make<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBUILD_WITH_MARCH_NATIVE<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_PANGOLIN_VIEWER<span class="o">=</span>OFF<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_SOCKET_PUBLISHER<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DUSE_STACK_TRACE_LOGGER<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DBOW_FRAMEWORK<span class="o">=</span>DBoW2
+</pre></div>
+</div>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>Run the core program required for ROS-based system in advance.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roscore
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please leave the <strong>roscore</strong> run.</p>
+</div>
+<section id="publisher">
+<h3>Publisher<a class="headerlink" href="#publisher" title="Link to this heading"></a></h3>
+<p>Publishers continually broadcast images as a ROS topic.
+Please execute one of the following command snippets in the new terminal.</p>
+<section id="publish-a-video-file">
+<h4>Publish a Video File<a class="headerlink" href="#publish-a-video-file" title="Link to this heading"></a></h4>
+<p>For using video files (e.g. <code class="docutils literal notranslate"><span class="pre">.mp4</span></code>) for visual SLAM or localization.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/path/to/openvslam/ros/devel/setup.bash
+rosrun<span class="w"> </span>publisher<span class="w"> </span>video<span class="w"> </span>-m<span class="w"> </span>/path/to/video.mp4
+</pre></div>
+</div>
+<p>Republish the ROS topic to <code class="docutils literal notranslate"><span class="pre">/camera/image_raw</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosrun<span class="w"> </span>image_transport<span class="w"> </span>republish<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>raw<span class="w"> </span><span class="k">in</span>:<span class="o">=</span>/video/image_raw<span class="w"> </span>raw<span class="w"> </span>out:<span class="o">=</span>/camera/image_raw
+</pre></div>
+</div>
+</section>
+<section id="publish-a-image-sequence">
+<h4>Publish a Image Sequence<a class="headerlink" href="#publish-a-image-sequence" title="Link to this heading"></a></h4>
+<p>For using image sequences for visual SLAM or localization.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/path/to/openvslam/ros/devel/setup.bash
+rosrun<span class="w"> </span>publisher<span class="w"> </span>image<span class="w"> </span>-i<span class="w"> </span>/path/to/images/
+</pre></div>
+</div>
+<p>Republish the ROS topic to <code class="docutils literal notranslate"><span class="pre">/camera/image_raw</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosrun<span class="w"> </span>image_transport<span class="w"> </span>republish<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>raw<span class="w"> </span><span class="k">in</span>:<span class="o">=</span>/video/image_raw<span class="w"> </span>raw<span class="w"> </span>out:<span class="o">=</span>/camera/image_raw
+</pre></div>
+</div>
+</section>
+<section id="publish-images-of-a-usb-camera">
+<h4>Publish Images of a USB Camera<a class="headerlink" href="#publish-images-of-a-usb-camera" title="Link to this heading"></a></h4>
+<p>For using a standard USB camera for visual SLAM or localization.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt<span class="w"> </span>install<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-usb-cam
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosparam<span class="w"> </span><span class="nb">set</span><span class="w"> </span>usb_cam/pixel_format<span class="w"> </span>yuyv
+rosrun<span class="w"> </span>usb_cam<span class="w"> </span>usb_cam_node
+</pre></div>
+</div>
+<p>Republish the ROS topic to <code class="docutils literal notranslate"><span class="pre">/camera/image_raw</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosrun<span class="w"> </span>image_transport<span class="w"> </span>republish<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>raw<span class="w"> </span><span class="k">in</span>:<span class="o">=</span>/usb_cam/image_raw<span class="w"> </span>raw<span class="w"> </span>out:<span class="o">=</span>/camera/image_raw
+</pre></div>
+</div>
+</section>
+</section>
+<section id="subscriber">
+<h3>Subscriber<a class="headerlink" href="#subscriber" title="Link to this heading"></a></h3>
+<p>Subscribers continually receive images.
+Please execute one of the following command snippets in the new terminal.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Option arguments are the same as <a class="reference internal" href="example.html#chapter-example"><span class="std std-ref">the examples of OpenVSLAM</span></a>.</p>
+</div>
+<section id="tracking-and-mapping">
+<h4>Tracking and Mapping<a class="headerlink" href="#tracking-and-mapping" title="Link to this heading"></a></h4>
+<p>We provide an example snippet for visual SLAM.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./openvslam/ros/src/openvslam/src/run_slam.cc</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/path/to/openvslam/ros/devel/setup.bash
+rosrun<span class="w"> </span>openvslam<span class="w"> </span>run_slam<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/orb_vocab.dbow2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>/path/to/config.yaml
+</pre></div>
+</div>
+</section>
+<section id="localization">
+<h4>Localization<a class="headerlink" href="#localization" title="Link to this heading"></a></h4>
+<p>We provide an example snippet for localization based on a prebuilt map.
+The source code is placed at <code class="docutils literal notranslate"><span class="pre">./ros/src/openvslam/src/run_localization.cc</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/path/to/openvslam/ros/devel/setup.bash
+rosrun<span class="w"> </span>openvslam<span class="w"> </span>run_localization<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/orb_vocab.dbow2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>/path/to/config.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--map-db<span class="w"> </span>/path/to/map.msg
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="docker.html" class="btn btn-neutral float-left" title="Running on Docker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="trouble_shooting.html" class="btn btn-neutral float-right" title="Trouble Shooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, National Institute of Advanced Industrial Science and Technology (AIST).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
