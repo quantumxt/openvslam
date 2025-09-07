@@ -10,13 +10,13 @@ Installation
 Source code
 ===========
 
-The source code can be viewed from this `GitHub repository <https://github.com/xdspacelab/openvslam>`_.
+The source code can be viewed from this `GitHub repository <https://github.com/quantumxt/openvslam>`_.
 
 Cloning the repository:
 
 .. code-block:: bash
 
-       git clone https://github.com/xdspacelab/openvslam
+       git clone https://github.com/quantumxt/openvslam
 
 If you are Windows 10 user, please install the dependencies and OpenVSLAM with :ref:`SocketViewer support <subsection-dependencies-socketviewer>` on `Windows Subsystem for Linux (WSL) <https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux>`__.
 We have checked the correct operation of OpenVSLAM and SocketViewer on Ubuntu 16.04 running on WSL.
